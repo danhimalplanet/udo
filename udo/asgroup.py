@@ -424,7 +424,7 @@ class AutoscaleGroup:
         else:
             group = []
             group.append(name) # I add a ASG name to a list because suspend_processes expects a list
-            self.conn.suspend_processes( AutoScalingGroupName = name)
+            self.conn.suspend_processes( AutoScalingGroupName = name, ScalingProcesses = [ 'AlarmNotification', 'ScheduledActions' ] )
             if self.suspend_status():
                 util.message_integrations("Suspended all autoscaling processes for {}".format(name))
                 return
